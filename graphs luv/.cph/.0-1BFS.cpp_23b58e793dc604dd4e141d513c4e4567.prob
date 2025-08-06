@@ -1,0 +1,1 @@
+{"name":"Local: 0-1BFS","url":"c:\\Users\\sanat\\OneDrive\\Desktop\\cp codes\\graphs luv\\0-1BFS.cpp","tests":[{"id":1738959672933,"input":"7\n1 2\n3 2\n3 4\n7 4\n6 2\n5 6\n7 5\n","output":"2"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\sanat\\OneDrive\\Desktop\\cp codes\\graphs luv\\0-1BFS.cpp","group":"local","local":true}

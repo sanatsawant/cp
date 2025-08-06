@@ -1,0 +1,1 @@
+{"name":"Local: detectCycles","url":"c:\\Users\\sanat\\OneDrive\\Desktop\\cp codes\\graphs luv\\detectCycles.cpp","tests":[{"id":1738676279986,"input":"5 5\n0 1\n1 2\n2 3\n3 4 \n4 1","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\sanat\\OneDrive\\Desktop\\cp codes\\graphs luv\\detectCycles.cpp","group":"local","local":true}
