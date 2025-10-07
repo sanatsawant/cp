@@ -21,6 +21,7 @@ void solve(){
     while(!q.empty()){
         auto t=q.top();
         q.pop();
+        // if(t[0] > dist[t[1]] ) continue;     //stale entry check  // alternative for vis array
         if(vis[t.second]) continue;
         vis[t.second]=1;
         for(auto child:g[t.second]){
