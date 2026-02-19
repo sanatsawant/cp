@@ -1,0 +1,29 @@
+const int N=2e5+10;
+vector<ll> v;
+node t[4*N];
+struct node{
+    ll mx;
+    
+};
+node merge(node a,node b){
+    node ans;
+    ans.mx=max(a.mx,b.mx);
+    return ans;
+}
+
+void build(int id,int l,int r){
+    if(l==r){
+        t[id].mx=v[l];
+        return;
+    }
+    int mid=(l+r)/2;
+    build(2*id,l,mid);
+    build(2*id+1,mid+1,r);
+    t[id]=merge(t[2*id],t[2*id+1]);
+}
+int query(int id,int l,int r,int lq,int rq){
+    if(lq>r || rq<l) return -1;
+    if(lq<=l && rq>=r) return t[id].mx;
+    int mid=(l+r)/2;
+    return max(query(2*id,l,mid,lq,rq),query(2*id+1,mid+1,r,lq,rq));
+}
