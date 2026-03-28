@@ -1,0 +1,62 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define all(x) (x).begin(), (x).end()
+#define ll long long
+#define pb push_back
+#define M 1000000007
+const int N=1e5+10;
+int tt=1;
+
+
+void solve(){
+    int n,m;cin>>n>>m;
+    vector<int> g[n+1];
+    vector<int> vis(n+1);
+    for(int i=0;i<m;i++){
+        int u,v;cin>>u>>v;
+        g[u].pb(v);
+        g[v].pb(u);
+    }
+    ll a=0;
+
+    vector<int> col(n+1,-1);
+    auto bfs=[&](int u){
+        bool ok=true;
+        queue<int> q;q.push(u);
+        col[u]=1;
+        int ans[2]={0};
+        ans[1]++;
+        while(q.size()){
+            int x=q.front();
+            q.pop();
+            for(auto child:g[x]){
+                if(col[child]==-1){
+                    col[child]=1-col[x];
+                    ans[col[child]]++;
+                    q.push(child);
+                }
+                else if(col[child]==col[x]) ok=false; 
+            }
+        }
+        if(!ok) return;
+        a+=max(ans[0],ans[1]);
+    };
+
+    for(int i=1;i<=n;i++){
+        if(col[i]==-1) bfs(i);
+    }
+    cout<<a<<'\n';
+
+    
+
+    
+}
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cin>>tt;
+    while(tt--){
+        solve();
+    }
+}
