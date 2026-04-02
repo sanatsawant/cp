@@ -1,0 +1,23 @@
+ll fact[N], inv_fact[N];
+
+ll power(ll a, ll b, ll mod) {
+    ll res = 1; a %= mod;
+    while (b > 0) {
+        if (b & 1) res = res * a % mod;
+        a = a * a % mod;
+        b >>= 1;
+    }
+    return res;
+}
+
+void precompute() {
+    fact[0] = 1;
+    for (int i = 1; i < N; i++) fact[i] = fact[i-1] * i % M;
+    inv_fact[N-1] = power(fact[N-1], M-2, M);
+    for (int i = N-2; i >= 0; i--) inv_fact[i] = inv_fact[i+1] * (i+1) % M;
+}
+
+ll C(int n, int k) {
+    if (k < 0 || k > n) return 0;
+    return fact[n] % M * inv_fact[k] % M * inv_fact[n-k] % M;
+}
