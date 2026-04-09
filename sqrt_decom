@@ -1,0 +1,47 @@
+class NumArray {
+public:
+    vector<int> b;
+    vector<int> v;
+    int n;
+    int blocksize;
+    NumArray(vector<int>& v) {
+        this->v=v;
+        n=v.size();
+        blocksize=ceil(sqrt(n));
+        b.resize(blocksize,0);
+
+        for(int i=0;i<n;i++){
+            int blockno=i/blocksize;
+            b[blockno]+=v[i];
+        } 
+    }
+    
+    void update(int index, int val) {
+        int blockno=index/blocksize;
+        b[blockno]+=(val-v[index]);
+        v[index]=val;
+        
+    }
+    
+    int sumRange(int left, int right) {
+        int startblock=left/blocksize;
+        int endblock=right/blocksize;
+        int ans=0;
+        if(startblock == endblock){
+            for(int i=left;i<=right;i++) ans+=v[i];
+        }
+        else{
+            for(int i=left;i<=(startblock+1)*blocksize-1;i++) ans+=v[i];
+            for(int i=startblock+1;i<=endblock-1;i++) ans+=b[i];
+            for(int i=endblock*blocksize;i<=right;i++) ans+=v[i];
+        }
+        return ans;
+    }
+};
+
+/**
+ * Your NumArray object will be instantiated and called as such:
+ * NumArray* obj = new NumArray(nums);
+ * obj->update(index,val);
+ * int param_2 = obj->sumRange(left,right);
+ */
