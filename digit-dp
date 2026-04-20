@@ -1,0 +1,33 @@
+    using ll=long long;
+    string L,R;
+    ll dp[10][2][2][10];
+    int len;
+    ll rec(int idx,int lo,int hi,ll cnt){
+        if(idx==len) return cnt;
+        if(dp[idx][lo][hi][cnt]==-1){
+            ll ans=0;
+            int loLim=0;
+            int hiLim=9;
+            if(lo==1) loLim=L[idx]-'0';
+            if(hi==1) hiLim=R[idx]-'0';
+            for(int i=loLim;i<=hiLim;i++){
+                int nlo=lo;
+                int nhi=hi;
+                if(i!=L[idx]-'0') nlo=0;
+                if(i!=R[idx]-'0') nhi=0;
+                ll ncnt=cnt+(i==1);
+                ans+=rec(idx+1,nlo,nhi,ncnt);
+            }
+            dp[idx][lo][hi][cnt]=ans;
+        }
+        return dp[idx][lo][hi][cnt];
+
+    }
+    int countDigitOne(int n) {
+        memset(dp,-1,sizeof(dp));
+        R=to_string(n);
+        len=R.size();
+        L = string(len, '0');
+        return rec(0,1,1,0);
+        
+    }
