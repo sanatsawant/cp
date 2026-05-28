@@ -39,9 +39,35 @@ public:
     }
 };
 
-/**
- * Your NumArray object will be instantiated and called as such:
- * NumArray* obj = new NumArray(nums);
- * obj->update(index,val);
- * int param_2 = obj->sumRange(left,right);
- */
+//opyimized SQRT decom (minor optimizations while loop better here)
+int n=Q.size();
+        int k=220;
+
+        int blocks=(n+k-1)/k;
+        vector<map<ll,int>> b(blocks);
+        vector<ll> lazy(blocks);
+        for(int i=0;i<q.size();i++){
+            b[i/k][q[i]]++;
+        }
+        vector<int> ans;
+        for(auto& x:que){
+            if(x[0]==1){
+                int l=x[1],r=x[2],val=x[3];
+
+                while(l%k != 0 && l<=r){
+                    b[l/k][q[l]]--;
+                    q[l]+=val;
+                    b[l/k][q[l]]++;
+                    l++;
+                }
+                while(r%k!=k-1 && l<=r){
+                    b[r/k][q[r]]--;
+                    q[r]+=val;
+                    b[r/k][q[r]]++;
+                    r--;
+                }
+                if(l<r){ 
+                    for(int i=l/k;i<=r/k;i++) lazy[i]+=val;
+                }
+            
+            }
