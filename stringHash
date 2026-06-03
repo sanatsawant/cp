@@ -1,0 +1,23 @@
+using ll=long long;
+    struct hasher{
+        int sz;
+        ll M,p;
+        vector<ll> fHash,pk;
+        void init(string s,ll _p,ll _M){
+            M=_M;
+            p=_p;
+            sz=s.size();
+            fHash.resize(sz);
+            pk.resize(sz);
+            fHash[0]=(s[0]-'0'+1);
+            pk[0]=1; //p^k k=0
+            for(int i=1;i<sz;i++){
+                fHash[i]=(fHash[i-1]*p + (s[i]-'0'+1))%M;
+                pk[i]=(pk[i-1]*p)%M;
+            }
+        }
+        ll getfHash(int l,int r){
+            if(l==0) return fHash[r];
+            else return ((fHash[r]-fHash[l-1]*pk[r-l+1])%M+M)%M;
+        }
+    };
