@@ -1,0 +1,16 @@
+int timer;
+vector<int> tin,tout,euler;
+vector<vector<int>> g;
+
+void dfs(int u,int p){
+    tin[u]=timer;
+    euler[timer++]=u;
+
+    for(auto v:g[u]){
+        if(v==p) continue;
+        dfs(v,u);
+    }
+
+    tout[u]=timer;
+    euler[timer++]=u;
+}
